@@ -8,7 +8,7 @@ df = pd.read_csv('data.csv')
 players = {key: [] for key in df['Player'].unique()}
 df.loc[:, 'Seen'] = False
 
-# Loop through rows and print each row
+# Loop through rows
 for index, row in df.iterrows():
     if int(row['Total Score']) <= 170 and row['Seen'] is False:
         player = row['Player']
@@ -23,8 +23,6 @@ for index, row in df.iterrows():
             if loop_row['Legs'] is not leg:
                 break
 
-
-print(players)
 
 # Function to calculate the average checkout shot count for each player
 def calculate_average_shots_to_checkout(player):
