@@ -36,6 +36,6 @@ for p in players.keys():
     summary_table[p] = average_checkouts
 
 # Print the summary table
-print("Player\tAverage Check Out Shot Count")
+print('{:<20}\t\t\t{:<20}'.format('Player', 'Average Check Out Shot Count From a Score of 170 or Below'))
 for player, average_checkouts in summary_table.items():
-    print(player + "\t" + str(round(average_checkouts, 2)))
+    print('{:<20}\t{:^20}'.format(player, str(round(average_checkouts, 2))))
