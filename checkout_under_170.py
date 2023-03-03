@@ -3,23 +3,23 @@
 import pandas as pd
 import statistics as stat
 
-
 df = pd.read_csv('data.csv')
 players = {key: [] for key in df['Player'].unique()}
 df.loc[:, 'Seen'] = False
 
 # Loop through rows
 for index, row in df.iterrows():
-    if int(row['Total Score']) <= 170 and row['Seen'] is False:
+    if int(row['Total Score']) <= 170 and (not df.loc[index, 'Seen']) and int(row['Total Score']) != 0:
         player = row['Player']
         leg = row['Legs']
         shots = 0
         for loop_index, loop_row in df.iloc[index:].iterrows():
             if loop_row['Legs'] is leg and loop_row['Player'] is player:
-                row['Seen'] = True
+                df.loc[loop_index, 'Seen'] = True
                 shots += 1
                 if loop_row['Total Score'] == 0:  # the player checked out
                     players[player].append(shots)
+                    break
             if loop_row['Legs'] is not leg:
                 break
 
@@ -28,6 +28,7 @@ for index, row in df.iterrows():
 def calculate_average_shots_to_checkout(player):
     return stat.mean(players[player])
 
+[print(i, ": ", players[i], "\n") for i in players]
 
 # Create the summary table
 summary_table = {}
