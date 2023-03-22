@@ -1,5 +1,5 @@
-# We're trying to create a summary table of each player's average check out shot count from a score of 170 oar below.
-# The table will have each player as a row and one column with the average check out shot count from  170 or below.
+# We're trying to create a summary table of each player's average check out shot count from a score of 501 or below.
+# The table will have each player as a row and one column with the average check out shot count from  501 or below.
 import pandas as pd
 import statistics as stat
 
@@ -28,15 +28,16 @@ for index, row in df.iterrows():
 def calculate_average_shots_to_checkout(player):
     return stat.mean(players[player])
 
+
 [print(i, ": ", players[i], "\n") for i in players]
 
 # Create the summary table
 summary_table = {}
 for p in players.keys():
-    average_checkouts = calculate_average_shots_to_checkout(p)
-    summary_table[p] = average_checkouts
+    average_checkout = calculate_average_shots_to_checkout(p)
+    summary_table[p] = average_checkout
 
 # Print the summary table
-print('{:<20}\t\t\t{:<20}'.format('Player', 'Average Check Out Shot Count From a Score of 170 or Below'))
+print('{:<20}\t\t\t{:<20}'.format('Player', 'Average Check Out Shot Count From a Score of 501 or Below'))
 for player, average_checkouts in summary_table.items():
     print('{:<20}\t{:^20}'.format(player, str(round(average_checkouts, 2))))
